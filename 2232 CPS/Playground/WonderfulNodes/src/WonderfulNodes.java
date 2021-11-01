@@ -8,11 +8,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class WonderfulNodes extends Application {
     private final static double nodeWidth = 50;
     private final static double nodeHeight = 50;
+    private final static int levelDiffer = 100;
+    private final static int startX = 300;
+    private final static int startY = 50;
 
-    public StackPane nodeShape(String value) {
+    private StackPane nodeShape(String value) {
         final Text nodeText = new Text(value);
         final Rectangle rectangle = new Rectangle(nodeWidth, nodeHeight);
         rectangle.setFill(Color.WHITE);
@@ -22,10 +27,10 @@ public class WonderfulNodes extends Application {
         return node;
     }
 
-    public StackPane nodeShape(String value, double x, double y) {
-        StackPane node = nodeShape(value);
-        setNodeLayout(node, x, y);
-        return node;
+    public StackPane nodeShape(Node node, double x, double y) {
+        StackPane nodePane = nodeShape(String.valueOf(node.value));
+        setNodeLayout(nodePane, x, y);
+        return nodePane;
     }
 
     public Line lineBetweenNodes(StackPane nodeX, StackPane nodeY) {
@@ -39,21 +44,74 @@ public class WonderfulNodes extends Application {
         return internalLine;
     }
 
-    public void setNodeLayout(StackPane node, double x, double y) {
+    private void setNodeLayout(StackPane node, double x, double y) {
         node.setLayoutX(x - nodeWidth * 0.5);
         node.setLayoutY(y - nodeWidth * 0.5);
     }
 
+    private void loopNode(
+            Node node, StackPane nodePane,
+            int x, int y, int xDiffer,
+            ArrayList<StackPane> shapes, ArrayList<Line> lines
+    ) {
+        final int newY = y + levelDiffer;
+
+        if (node.left != null) {
+            final int leftX = x - xDiffer;
+            StackPane leftNodePane = nodeShape(node.left, leftX, newY);
+            lines.add(lineBetweenNodes(nodePane, leftNodePane));
+            shapes.add(leftNodePane);
+            loopNode(node.left, leftNodePane, leftX, newY, xDiffer / 2, shapes, lines);
+        }
+
+        if (node.right != null) {
+            final int rightX = x + xDiffer;
+            StackPane rightNodePane = nodeShape(node.right, rightX, newY);
+            lines.add(lineBetweenNodes(nodePane, rightNodePane));
+            shapes.add(rightNodePane);
+            loopNode(node.right, rightNodePane, rightX, newY, xDiffer / 2, shapes, lines);
+        }
+    }
+
+    public Group visualizeTree(MyBinaryTree tree) {
+        ArrayList<StackPane> shapes = new ArrayList<>();
+        ArrayList<Line> lines = new ArrayList<>();
+
+        Group group = new Group();
+
+        Node root = tree.root;
+
+        StackPane node = nodeShape(root, startX, startY);
+        shapes.add(node);
+
+        loopNode(root, node, startX, startY, levelDiffer, shapes, lines);
+
+        group.getChildren().addAll(shapes);
+        group.getChildren().addAll(lines);
+
+        return group;
+    }
+
+    private MyBinaryTree createTestBinaryTree() {
+        MyBinaryTree myBinaryTree = new MyBinaryTree();
+
+        myBinaryTree.add(6);
+        myBinaryTree.add(4);
+        myBinaryTree.add(8);
+        myBinaryTree.add(3);
+        myBinaryTree.add(5);
+        myBinaryTree.add(7);
+        myBinaryTree.add(9);
+        myBinaryTree.add(10);
+
+        return myBinaryTree;
+    }
+
     @Override
     public void start(Stage stage) {
-        StackPane nodeStackA = nodeShape("A", 300, 50);
-        StackPane nodeStackB = nodeShape("B", 200, 200);
-        StackPane nodeStackC = nodeShape("C", 400, 200);
+        MyBinaryTree myBinaryTree = createTestBinaryTree();
 
-        Line intervalLineAB = lineBetweenNodes(nodeStackA, nodeStackB);
-        Line intervalLineAC = lineBetweenNodes(nodeStackA, nodeStackC);
-
-        Group root = new Group(nodeStackA, nodeStackB, nodeStackC, intervalLineAB, intervalLineAC);
+        Group root = visualizeTree(myBinaryTree);
 
         // Creating a scene object
         Scene scene = new Scene(root, 600, 600);
