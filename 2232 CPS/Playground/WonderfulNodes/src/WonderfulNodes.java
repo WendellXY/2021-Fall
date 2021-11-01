@@ -49,7 +49,7 @@ public class WonderfulNodes extends Application {
         node.setLayoutY(y - nodeWidth * 0.5);
     }
 
-    private void loopNode(
+    private void visualizeNodeRecursive(
             Node node, StackPane nodePane,
             int x, int y, int xDiffer,
             ArrayList<StackPane> shapes, ArrayList<Line> lines
@@ -61,7 +61,7 @@ public class WonderfulNodes extends Application {
             StackPane leftNodePane = nodeShape(node.left, leftX, newY);
             lines.add(lineBetweenNodes(nodePane, leftNodePane));
             shapes.add(leftNodePane);
-            loopNode(node.left, leftNodePane, leftX, newY, xDiffer / 2, shapes, lines);
+            visualizeNodeRecursive(node.left, leftNodePane, leftX, newY, xDiffer / 2, shapes, lines);
         }
 
         if (node.right != null) {
@@ -69,7 +69,7 @@ public class WonderfulNodes extends Application {
             StackPane rightNodePane = nodeShape(node.right, rightX, newY);
             lines.add(lineBetweenNodes(nodePane, rightNodePane));
             shapes.add(rightNodePane);
-            loopNode(node.right, rightNodePane, rightX, newY, xDiffer / 2, shapes, lines);
+            visualizeNodeRecursive(node.right, rightNodePane, rightX, newY, xDiffer / 2, shapes, lines);
         }
     }
 
@@ -80,11 +80,10 @@ public class WonderfulNodes extends Application {
         Group group = new Group();
 
         Node root = tree.root;
-
         StackPane node = nodeShape(root, startX, startY);
         shapes.add(node);
 
-        loopNode(root, node, startX, startY, levelDiffer, shapes, lines);
+        visualizeNodeRecursive(root, node, startX, startY, levelDiffer, shapes, lines);
 
         group.getChildren().addAll(shapes);
         group.getChildren().addAll(lines);
