@@ -1,4 +1,6 @@
 public class MyBinaryTree {
+    int size = 0;
+
     Node root;
 
     private Node addRecursive(Node current, int value) {
@@ -19,5 +21,6 @@ public class MyBinaryTree {
 
     public void add(int value) {
         root = addRecursive(root, value);
+        size += 1;
     }
 }

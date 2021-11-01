@@ -14,8 +14,9 @@ public class WonderfulNodes extends Application {
     private final static double nodeWidth = 50;
     private final static double nodeHeight = 50;
     private final static int levelDiffer = 100;
-    private final static int startX = 300;
-    private final static int startY = 50;
+
+    double sceneWidth;
+    double sceneHeight;
 
     private StackPane nodeShape(String value) {
         final Text nodeText = new Text(value);
@@ -25,6 +26,11 @@ public class WonderfulNodes extends Application {
         final StackPane node = new StackPane();
         node.getChildren().addAll(rectangle, nodeText);
         return node;
+    }
+
+    private void setNodeLayout(StackPane node, double x, double y) {
+        node.setLayoutX(x - nodeWidth * 0.5);
+        node.setLayoutY(y - nodeWidth * 0.5);
     }
 
     public StackPane nodeShape(Node node, double x, double y) {
@@ -44,9 +50,22 @@ public class WonderfulNodes extends Application {
         return internalLine;
     }
 
-    private void setNodeLayout(StackPane node, double x, double y) {
-        node.setLayoutX(x - nodeWidth * 0.5);
-        node.setLayoutY(y - nodeWidth * 0.5);
+    private int calculateTreeLevel(MyBinaryTree tree) {
+        int treeSize = tree.size;
+        // suppose the tree is perfectly balanced
+        int level = 0;
+        int maximumNodesForTheLevel;
+
+        do {
+            maximumNodesForTheLevel = 1 << level++;
+            treeSize -= maximumNodesForTheLevel;
+        } while (treeSize > maximumNodesForTheLevel);
+
+        return level;
+    }
+
+    private int calculateXLevelDiffer(MyBinaryTree tree) {
+        return (int) (calculateTreeLevel(tree) * nodeWidth);
     }
 
     private void visualizeNodeRecursive(
@@ -58,22 +77,25 @@ public class WonderfulNodes extends Application {
 
         if (node.left != null) {
             final int leftX = x - xDiffer;
-            StackPane leftNodePane = nodeShape(node.left, leftX, newY);
-            lines.add(lineBetweenNodes(nodePane, leftNodePane));
-            shapes.add(leftNodePane);
-            visualizeNodeRecursive(node.left, leftNodePane, leftX, newY, xDiffer / 2, shapes, lines);
+            StackPane newNodePane = nodeShape(node.left, leftX, newY);
+            lines.add(lineBetweenNodes(nodePane, newNodePane));
+            shapes.add(newNodePane);
+            visualizeNodeRecursive(node.left, newNodePane, leftX, newY, xDiffer >> 1, shapes, lines);
         }
 
         if (node.right != null) {
             final int rightX = x + xDiffer;
-            StackPane rightNodePane = nodeShape(node.right, rightX, newY);
-            lines.add(lineBetweenNodes(nodePane, rightNodePane));
-            shapes.add(rightNodePane);
-            visualizeNodeRecursive(node.right, rightNodePane, rightX, newY, xDiffer / 2, shapes, lines);
+            StackPane newNodePane = nodeShape(node.right, rightX, newY);
+            lines.add(lineBetweenNodes(nodePane, newNodePane));
+            shapes.add(newNodePane);
+            visualizeNodeRecursive(node.right, newNodePane, rightX, newY, xDiffer >> 1, shapes, lines);
         }
     }
 
     public Group visualizeTree(MyBinaryTree tree) {
+        final int startX = (int) this.sceneWidth / 2;
+        final int startY = (int) nodeHeight;
+
         ArrayList<StackPane> shapes = new ArrayList<>();
         ArrayList<Line> lines = new ArrayList<>();
 
@@ -83,7 +105,7 @@ public class WonderfulNodes extends Application {
         StackPane node = nodeShape(root, startX, startY);
         shapes.add(node);
 
-        visualizeNodeRecursive(root, node, startX, startY, levelDiffer, shapes, lines);
+        visualizeNodeRecursive(root, node, startX, startY, calculateXLevelDiffer(tree), shapes, lines);
 
         group.getChildren().addAll(shapes);
         group.getChildren().addAll(lines);
@@ -91,7 +113,27 @@ public class WonderfulNodes extends Application {
         return group;
     }
 
-    private MyBinaryTree createTestBinaryTree() {
+    @Override
+    public void start(Stage stage) {
+        MyBinaryTree myBinaryTree = createTestBinaryTree();
+        // initialize sceneWidth and sceneHeight
+        final double treeLevel = calculateTreeLevel(myBinaryTree);
+        this.sceneWidth = Math.pow(2, treeLevel + 1) * nodeWidth;
+        this.sceneHeight = 2 * treeLevel * nodeHeight;
+        // Visualize Tree
+        Group root = visualizeTree(myBinaryTree);
+        // Creating a scene object
+        Scene scene = new Scene(root, sceneWidth, sceneHeight);
+        stage.setTitle("WonderfulNodes");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    private static MyBinaryTree createTestBinaryTree() {
         MyBinaryTree myBinaryTree = new MyBinaryTree();
 
         myBinaryTree.add(6);
@@ -101,26 +143,7 @@ public class WonderfulNodes extends Application {
         myBinaryTree.add(5);
         myBinaryTree.add(7);
         myBinaryTree.add(9);
-        myBinaryTree.add(10);
 
         return myBinaryTree;
-    }
-
-    @Override
-    public void start(Stage stage) {
-        MyBinaryTree myBinaryTree = createTestBinaryTree();
-
-        Group root = visualizeTree(myBinaryTree);
-
-        // Creating a scene object
-        Scene scene = new Scene(root, 600, 600);
-        stage.setTitle("WonderfulNodes");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
