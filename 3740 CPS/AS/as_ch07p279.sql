@@ -19,8 +19,8 @@ CREATE TABLE EMP_1(
 -- Having created the table structure in Problem 1, write the SQL code to enter
 --  the first two rows for the table shown in Figure P7.2.
 -- ----------------------------
-INSERT INTO EMP_1 VALUES('101', 'News', 'John', 'G', '08-Nov-00', 502);
-INSERT INTO EMP_1 VALUES('102', 'Senior', 'David', 'H', '12-Jul-89', 501);
+INSERT INTO EMP_1 VALUES('101', 'News', 'John', 'G', '2000-11-02', 502);
+INSERT INTO EMP_1 VALUES('102', 'Senior', 'David', 'H', '1989-07-12', 501);
 -- ----------------------------
 -- Question 3
 -- Assuming that the data shown in the EMP_1 table have been entered, write the
@@ -50,7 +50,7 @@ ROLLBACK;
 -- ----------------------------
 DELETE FROM EMP_1
 WHERE EMP_FNAME = 'William' AND EMP_LNAME = "Smithfield"
-AND EMP_HIREDATE = '22-June-04'
+AND EMP_HIREDATE = '2004-06-22'
 AND JOB_CODE = '500';
 -- ----------------------------
 -- Question 7
@@ -71,7 +71,7 @@ ROLLBACK;
 -- ----------------------------
 CREATE TABLE EMP_2 AS SELECT * FROM EMP_1;
 ALTER TABLE EMP_2
-ADD EMP_PCT NUMBER(4,2),
+ADD EMP_PCT NUMERIC(4,2),
 ADD PROJ_NUM CHAR(3);
 -- ----------------------------
 -- Question 9
