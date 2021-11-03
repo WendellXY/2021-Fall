@@ -1,4 +1,4 @@
-public class MyBinaryTree implements WonderfulNodeAccessibleTree {
+public class MyBinaryTree implements WonderfulNodesAccessibleTree {
     private int size = 0;
 
     private Node root;

@@ -50,7 +50,7 @@ public class WonderfulNodes extends Application {
         return internalLine;
     }
 
-    private int calculateTreeLevel(WonderfulNodeAccessibleTree tree) {
+    private int calculateTreeLevel(WonderfulNodesAccessibleTree tree) {
         int treeSize = tree.getSize();
         // suppose the tree is perfectly balanced
         int level = 0;
@@ -64,7 +64,7 @@ public class WonderfulNodes extends Application {
         return level;
     }
 
-    private int calculateXLevelDiffer(WonderfulNodeAccessibleTree tree) {
+    private int calculateXLevelDiffer(WonderfulNodesAccessibleTree tree) {
         return (int) (calculateTreeLevel(tree) * nodeWidth);
     }
 
@@ -92,7 +92,7 @@ public class WonderfulNodes extends Application {
         }
     }
 
-    public Group visualizeTree(WonderfulNodeAccessibleTree tree) {
+    public Group visualizeTree(WonderfulNodesAccessibleTree tree) {
         final int startX = (int) this.sceneWidth / 2;
         final int startY = (int) nodeHeight;
 
@@ -115,13 +115,13 @@ public class WonderfulNodes extends Application {
 
     @Override
     public void start(Stage stage) {
-        MyBinaryTree myBinaryTree = createTestBinaryTree();
+        WonderfulNodesAccessibleTree tree = createTestAVLTree();
         // initialize sceneWidth and sceneHeight
-        final double treeLevel = calculateTreeLevel(myBinaryTree);
+        final double treeLevel = calculateTreeLevel(tree);
         this.sceneWidth = Math.pow(2, treeLevel + 1) * nodeWidth;
         this.sceneHeight = 2 * treeLevel * nodeHeight;
         // Visualize Tree
-        Group root = visualizeTree(myBinaryTree);
+        Group root = visualizeTree(tree);
         // Creating a scene object
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
         stage.setTitle("WonderfulNodes");
@@ -133,7 +133,7 @@ public class WonderfulNodes extends Application {
         launch(args);
     }
 
-    private static MyBinaryTree createTestBinaryTree() {
+    private static WonderfulNodesAccessibleTree createTestBinaryTree() {
         MyBinaryTree myBinaryTree = new MyBinaryTree();
 
         myBinaryTree.add(6);
@@ -145,5 +145,20 @@ public class WonderfulNodes extends Application {
         myBinaryTree.add(9);
 
         return myBinaryTree;
+    }
+
+    private static WonderfulNodesAccessibleTree createTestAVLTree() {
+        AVLTree myAVLTree = new AVLTree();
+        //inserting  3, 1, 4, 6, 9, 2, 5, and 7
+        myAVLTree.insert(3);
+        myAVLTree.insert(1);
+        myAVLTree.insert(4);
+        myAVLTree.insert(6);
+        myAVLTree.insert(9);
+        myAVLTree.insert(2);
+        myAVLTree.insert(5);
+        myAVLTree.insert(7);
+
+        return myAVLTree;
     }
 }

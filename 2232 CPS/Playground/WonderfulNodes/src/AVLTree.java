@@ -1,5 +1,5 @@
-public class AVLTree implements WonderfulNodeAccessibleTree {
-    private int size;
+public class AVLTree implements WonderfulNodesAccessibleTree {
+    private int size = 0;
 
     private Node root;
 
@@ -59,7 +59,7 @@ public class AVLTree implements WonderfulNodeAccessibleTree {
     }
 
     public void insert(int key) {
-        _insert(root, key);
+        root = _insert(root, key);
         size++;
     }
 
@@ -77,7 +77,7 @@ public class AVLTree implements WonderfulNodeAccessibleTree {
     }
 
     public void delete(int key) {
-        _delete(root, key);
+        root = _delete(root, key);
         size--;
     }
 
