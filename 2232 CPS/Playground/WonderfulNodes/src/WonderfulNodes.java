@@ -34,7 +34,7 @@ public class WonderfulNodes extends Application {
     }
 
     public StackPane nodeShape(Node node, double x, double y) {
-        StackPane nodePane = nodeShape(String.valueOf(node.value));
+        StackPane nodePane = nodeShape(String.valueOf(node.key));
         setNodeLayout(nodePane, x, y);
         return nodePane;
     }
@@ -50,8 +50,8 @@ public class WonderfulNodes extends Application {
         return internalLine;
     }
 
-    private int calculateTreeLevel(MyBinaryTree tree) {
-        int treeSize = tree.size;
+    private int calculateTreeLevel(WonderfulNodeAccessibleTree tree) {
+        int treeSize = tree.getSize();
         // suppose the tree is perfectly balanced
         int level = 0;
         int maximumNodesForTheLevel;
@@ -64,7 +64,7 @@ public class WonderfulNodes extends Application {
         return level;
     }
 
-    private int calculateXLevelDiffer(MyBinaryTree tree) {
+    private int calculateXLevelDiffer(WonderfulNodeAccessibleTree tree) {
         return (int) (calculateTreeLevel(tree) * nodeWidth);
     }
 
@@ -92,7 +92,7 @@ public class WonderfulNodes extends Application {
         }
     }
 
-    public Group visualizeTree(MyBinaryTree tree) {
+    public Group visualizeTree(WonderfulNodeAccessibleTree tree) {
         final int startX = (int) this.sceneWidth / 2;
         final int startY = (int) nodeHeight;
 
@@ -101,7 +101,7 @@ public class WonderfulNodes extends Application {
 
         Group group = new Group();
 
-        Node root = tree.root;
+        Node root = tree.getRoot();
         StackPane node = nodeShape(root, startX, startY);
         shapes.add(node);
 

@@ -1,16 +1,26 @@
-public class MyBinaryTree {
-    int size = 0;
+public class MyBinaryTree implements WonderfulNodeAccessibleTree {
+    private int size = 0;
 
-    Node root;
+    private Node root;
+
+    @Override
+    public Node getRoot() {
+        return root;
+    }
+
+    @Override
+    public int getSize() {
+        return size;
+    }
 
     private Node addRecursive(Node current, int value) {
         if (current == null) {
             return new Node(value);
         }
 
-        if (value < current.value) {
+        if (value < current.key) {
             current.left = addRecursive(current.left, value);
-        } else if (value > current.value) {
+        } else if (value > current.key) {
             current.right = addRecursive(current.right, value);
         } else {
             return current;
