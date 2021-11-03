@@ -50,22 +50,17 @@ public class WonderfulNodes extends Application {
         return internalLine;
     }
 
-    private int calculateTreeLevel(WonderfulNodesAccessibleTree tree) {
-        int treeSize = tree.getSize();
-        // suppose the tree is perfectly balanced
-        int level = 0;
-        int maximumNodesForTheLevel;
+    private int calculateTreeDepth(Node node) {
+        if (node == null) { return 0; }
+        return 1 + Math.max(calculateTreeDepth(node.left), calculateTreeDepth(node.right));
+    }
 
-        do {
-            maximumNodesForTheLevel = 1 << level++;
-            treeSize -= maximumNodesForTheLevel;
-        } while (treeSize > maximumNodesForTheLevel);
-
-        return level;
+    private int calculateTreeDepth(WonderfulNodesAccessibleTree tree) {
+        return calculateTreeDepth(tree.getRoot());
     }
 
     private int calculateXLevelDiffer(WonderfulNodesAccessibleTree tree) {
-        return (int) (calculateTreeLevel(tree) * nodeWidth);
+        return (int) (calculateTreeDepth(tree) * nodeWidth);
     }
 
     private void visualizeNodeRecursive(
@@ -117,9 +112,11 @@ public class WonderfulNodes extends Application {
     public void start(Stage stage) {
         WonderfulNodesAccessibleTree tree = createTestAVLTree();
         // initialize sceneWidth and sceneHeight
-        final double treeLevel = calculateTreeLevel(tree);
-        this.sceneWidth = Math.pow(2, treeLevel + 1) * nodeWidth;
-        this.sceneHeight = 2 * treeLevel * nodeHeight;
+        final double treeDepth = calculateTreeDepth(tree);
+        System.out.println(treeDepth);
+
+        this.sceneWidth = Math.pow(2, treeDepth) * nodeWidth + 2 * nodeWidth;
+        this.sceneHeight = 2 * treeDepth * nodeHeight;
         // Visualize Tree
         Group root = visualizeTree(tree);
         // Creating a scene object
@@ -143,6 +140,8 @@ public class WonderfulNodes extends Application {
         myBinaryTree.add(5);
         myBinaryTree.add(7);
         myBinaryTree.add(9);
+        myBinaryTree.add(15);
+        myBinaryTree.add(16);
 
         return myBinaryTree;
     }
@@ -158,6 +157,8 @@ public class WonderfulNodes extends Application {
         myAVLTree.insert(2);
         myAVLTree.insert(5);
         myAVLTree.insert(7);
+
+        System.out.println();
 
         return myAVLTree;
     }
