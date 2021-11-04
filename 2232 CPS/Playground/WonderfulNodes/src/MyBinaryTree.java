@@ -33,4 +33,22 @@ public class MyBinaryTree implements WonderfulNodesAccessibleTree {
         root = addRecursive(root, value);
         size += 1;
     }
+
+    private Node removeRecursive(Node current, int value) {
+
+        if (value < current.key) {
+
+        } else if (value > current.key) {
+
+        } else {
+            
+        }
+
+        return null;
+    }
+
+    public void remove(int value) {
+        root = removeRecursive(root, value);
+        size--;
+    }
 }
