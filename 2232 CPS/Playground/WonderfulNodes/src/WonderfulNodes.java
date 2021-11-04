@@ -111,11 +111,12 @@ public class WonderfulNodes extends Application {
     @Override
     public void start(Stage stage) {
         WonderfulNodesAccessibleTree tree = createTestAVLTree();
+//        WonderfulNodesAccessibleTree tree = createTestBinaryTree();
         // initialize sceneWidth and sceneHeight
         final double treeDepth = calculateTreeDepth(tree);
         System.out.println(treeDepth);
 
-        this.sceneWidth = Math.pow(2, treeDepth) * nodeWidth + 2 * nodeWidth;
+        this.sceneWidth = Math.pow(2, treeDepth) * nodeWidth + 2 * nodeWidth + 10;
         this.sceneHeight = 2 * treeDepth * nodeHeight;
         // Visualize Tree
         Group root = visualizeTree(tree);
@@ -133,15 +134,25 @@ public class WonderfulNodes extends Application {
     private static WonderfulNodesAccessibleTree createTestBinaryTree() {
         MyBinaryTree myBinaryTree = new MyBinaryTree();
 
-        myBinaryTree.add(6);
-        myBinaryTree.add(4);
-        myBinaryTree.add(8);
-        myBinaryTree.add(3);
-        myBinaryTree.add(5);
-        myBinaryTree.add(7);
-        myBinaryTree.add(9);
-        myBinaryTree.add(15);
-        myBinaryTree.add(16);
+         myBinaryTree.add(37);
+         myBinaryTree.add(24);
+         myBinaryTree.add(42);
+         myBinaryTree.add(7);
+         myBinaryTree.add(2);
+         myBinaryTree.add(40);
+         myBinaryTree.add(42);
+         myBinaryTree.add(32);
+         myBinaryTree.add(120);
+
+//        myBinaryTree.add(120);
+//        myBinaryTree.add(42);
+//        myBinaryTree.add(42);
+//        myBinaryTree.add(7);
+//        myBinaryTree.add(2);
+//        myBinaryTree.add(32);
+//        myBinaryTree.add(37);
+//        myBinaryTree.add(24);
+//        myBinaryTree.add(4);
 
         return myBinaryTree;
     }
@@ -149,16 +160,26 @@ public class WonderfulNodes extends Application {
     private static WonderfulNodesAccessibleTree createTestAVLTree() {
         AVLTree myAVLTree = new AVLTree();
         //inserting  3, 1, 4, 6, 9, 2, 5, and 7
-        myAVLTree.insert(3);
-        myAVLTree.insert(1);
-        myAVLTree.insert(4);
-        myAVLTree.insert(6);
-        myAVLTree.insert(9);
-        myAVLTree.insert(2);
-        myAVLTree.insert(5);
-        myAVLTree.insert(7);
 
-        System.out.println();
+//         myAVLTree.insert(37);
+//         myAVLTree.insert(24);
+//         myAVLTree.insert(42);
+//         myAVLTree.insert(7);
+//         myAVLTree.insert(2);
+//         myAVLTree.insert(40);
+//         myAVLTree.insert(42);
+//         myAVLTree.insert(32);
+//         myAVLTree.insert(120);
+
+        myAVLTree.insert(120);
+        myAVLTree.insert(42);
+        myAVLTree.insert(42);
+        myAVLTree.insert(7);
+        myAVLTree.insert(2);
+        myAVLTree.insert(32);
+        myAVLTree.insert(37);
+        myAVLTree.insert(24);
+        myAVLTree.insert(4);
 
         return myAVLTree;
     }

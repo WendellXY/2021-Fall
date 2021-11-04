@@ -71,7 +71,7 @@ public class AVLTree implements WonderfulNodesAccessibleTree {
         } else if (node.key < key) {
             node.right = _insert(node.right, key);
         } else {
-            throw new RuntimeException("duplicate Key!");
+//            throw new RuntimeException("duplicate Key!");
         }
         return rebalance(node);
     }
