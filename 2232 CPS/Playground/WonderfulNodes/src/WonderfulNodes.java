@@ -110,8 +110,8 @@ public class WonderfulNodes extends Application {
 
     @Override
     public void start(Stage stage) {
-        WonderfulNodesAccessibleTree tree = createTestAVLTree();
-//        WonderfulNodesAccessibleTree tree = createTestBinaryTree();
+//        WonderfulNodesAccessibleTree tree = createTestAVLTree();
+        WonderfulNodesAccessibleTree tree = createTestBinaryTree();
         // initialize sceneWidth and sceneHeight
         final double treeDepth = calculateTreeDepth(tree);
         System.out.println(treeDepth);
@@ -134,25 +134,28 @@ public class WonderfulNodes extends Application {
     private static WonderfulNodesAccessibleTree createTestBinaryTree() {
         MyBinaryTree myBinaryTree = new MyBinaryTree();
 
-         myBinaryTree.add(37);
-         myBinaryTree.add(24);
-         myBinaryTree.add(42);
-         myBinaryTree.add(7);
-         myBinaryTree.add(2);
-         myBinaryTree.add(40);
-         myBinaryTree.add(42);
-         myBinaryTree.add(32);
-         myBinaryTree.add(120);
+//         myBinaryTree.add(37);
+//         myBinaryTree.add(24);
+//         myBinaryTree.add(42);
+//         myBinaryTree.add(7);
+//         myBinaryTree.add(2);
+//         myBinaryTree.add(40);
+//         myBinaryTree.add(42);
+//         myBinaryTree.add(32);
+//         myBinaryTree.add(120);
 
-//        myBinaryTree.add(120);
-//        myBinaryTree.add(42);
-//        myBinaryTree.add(42);
-//        myBinaryTree.add(7);
-//        myBinaryTree.add(2);
-//        myBinaryTree.add(32);
-//        myBinaryTree.add(37);
-//        myBinaryTree.add(24);
-//        myBinaryTree.add(4);
+        myBinaryTree.add(120);
+        myBinaryTree.add(42);
+        myBinaryTree.add(7);
+        myBinaryTree.add(2);
+        myBinaryTree.add(32);
+        myBinaryTree.add(37);
+        myBinaryTree.add(24);
+        myBinaryTree.add(40);
+
+        myBinaryTree.add(5);
+        myBinaryTree.add(10);
+        myBinaryTree.add(15);
 
         return myBinaryTree;
     }
@@ -179,7 +182,7 @@ public class WonderfulNodes extends Application {
         myAVLTree.insert(32);
         myAVLTree.insert(37);
         myAVLTree.insert(24);
-        myAVLTree.insert(4);
+        myAVLTree.insert(40);
 
         return myAVLTree;
     }
