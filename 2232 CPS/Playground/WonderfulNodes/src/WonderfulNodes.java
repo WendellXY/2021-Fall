@@ -110,8 +110,7 @@ public class WonderfulNodes extends Application {
 
     @Override
     public void start(Stage stage) {
-//        WonderfulNodesAccessibleTree tree = createTestAVLTree();
-        WonderfulNodesAccessibleTree tree = createTestBinaryTree();
+        WonderfulNodesAccessibleTree tree = createTestAVLTree();
         // initialize sceneWidth and sceneHeight
         final double treeDepth = calculateTreeDepth(tree);
         System.out.println(treeDepth);
@@ -134,55 +133,31 @@ public class WonderfulNodes extends Application {
     private static WonderfulNodesAccessibleTree createTestBinaryTree() {
         MyBinaryTree myBinaryTree = new MyBinaryTree();
 
-//         myBinaryTree.add(37);
-//         myBinaryTree.add(24);
-//         myBinaryTree.add(42);
-//         myBinaryTree.add(7);
-//         myBinaryTree.add(2);
-//         myBinaryTree.add(40);
-//         myBinaryTree.add(42);
-//         myBinaryTree.add(32);
-//         myBinaryTree.add(120);
-
-        myBinaryTree.add(120);
-        myBinaryTree.add(42);
-        myBinaryTree.add(7);
-        myBinaryTree.add(2);
-        myBinaryTree.add(32);
-        myBinaryTree.add(37);
-        myBinaryTree.add(24);
-        myBinaryTree.add(40);
-
-        myBinaryTree.add(5);
-        myBinaryTree.add(10);
-        myBinaryTree.add(15);
+         myBinaryTree.add(37);
+         myBinaryTree.add(24);
+         myBinaryTree.add(42);
+         myBinaryTree.add(7);
+         myBinaryTree.add(2);
+         myBinaryTree.add(40);
+         myBinaryTree.add(42);
+         myBinaryTree.add(32);
+         myBinaryTree.add(120);
 
         return myBinaryTree;
     }
 
     private static WonderfulNodesAccessibleTree createTestAVLTree() {
         AVLTree myAVLTree = new AVLTree();
-        //inserting  3, 1, 4, 6, 9, 2, 5, and 7
 
-//         myAVLTree.insert(37);
-//         myAVLTree.insert(24);
-//         myAVLTree.insert(42);
-//         myAVLTree.insert(7);
-//         myAVLTree.insert(2);
-//         myAVLTree.insert(40);
-//         myAVLTree.insert(42);
-//         myAVLTree.insert(32);
-//         myAVLTree.insert(120);
-
-        myAVLTree.insert(120);
-        myAVLTree.insert(42);
-        myAVLTree.insert(42);
-        myAVLTree.insert(7);
-        myAVLTree.insert(2);
-        myAVLTree.insert(32);
-        myAVLTree.insert(37);
+        myAVLTree.insert(15);
+        myAVLTree.insert(20);
         myAVLTree.insert(24);
-        myAVLTree.insert(40);
+        myAVLTree.insert(10);
+        myAVLTree.insert(13);
+        myAVLTree.insert(7);
+        myAVLTree.insert(30);
+        myAVLTree.insert(36);
+        myAVLTree.insert(25);
 
         return myAVLTree;
     }
