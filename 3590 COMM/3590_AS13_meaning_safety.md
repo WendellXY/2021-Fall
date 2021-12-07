@@ -1,0 +1,5 @@
+### Safety
+
+Nowadays, the global COVID-19 pandemic is still serious, even here in China, a country where most people are vaccinated, there are still several new cases recently, so we still can not loose vigilance. At the moment, university takes the access of students and teachers to campus very seriously; as students, we are required to report our health every day, and if we fail to do so on one day we will be restricted from leaving the school and even the dormitory. 
+
+However, this still has a hidden risk, that is, takeout. There are many students who choose to takeout instead of going to the cafeteria, which increases the risk of infection. If university cafeterias could increase the variety and quality of dishes and allow students to vote on their favorite dishes and then add them to the school cafeteria menu, this would reduce the likelihood of students choosing takeout, such that, reducing the risk of infection likely.
