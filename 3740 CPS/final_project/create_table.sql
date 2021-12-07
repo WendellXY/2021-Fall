@@ -1,3 +1,5 @@
+use final_project;
+
 CREATE TABLE `final_project`.`country` (
   `country_id` INT NOT NULL,
   `country_name` VARCHAR(45) NOT NULL,
@@ -46,7 +48,7 @@ CREATE TABLE `final_project`.`character` (
   PRIMARY KEY (`character_id`),
   FOREIGN KEY (`character_country`) REFERENCES `country`(`country_name`),
   FOREIGN KEY (`character_element`) REFERENCES `element`(`element_name`),
-  UNIQUE INDEX `archon_id` (`archon_id` ASC) VISIBLE);
+  UNIQUE INDEX `character_id` (`character_id` ASC) VISIBLE);
 
 INSERT INTO `character` (`character_id`, `character_name`, `character_country`, `character_age`, `character_element`) VALUES (1, 'Kazuha', 'Inadzuma', 18, 'Anemo');
 INSERT INTO `character` (`character_id`, `character_name`, `character_country`, `character_age`, `character_element`) VALUES (2, 'Bennett', 'Mondstadt', 18, 'Geo');
