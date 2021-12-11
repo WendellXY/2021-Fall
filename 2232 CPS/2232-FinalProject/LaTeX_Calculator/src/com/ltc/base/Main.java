@@ -1,6 +1,7 @@
 package com.ltc.base;
 
 import com.ltc.preprocesser.PreProcessor;
+import com.ltc.treebuilder.TreeBuilder;
 
 import java.util.Scanner;
 
@@ -27,5 +28,6 @@ public class Main {
         // PreProcess the LaTeX string before build the expression tree
         PreProcessor preProcessor = new PreProcessor();
         latex = preProcessor.process(latex);
+
     }
 }

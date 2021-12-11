@@ -1,4 +1,4 @@
-package com.ltc.strreader;
+package com.ltc.treebuilder;
 
 import java.util.ArrayList;
 
@@ -17,5 +17,13 @@ public class SimpleStack {
 
     public void push(String element) {
         list.add(element);
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public int size() {
+        return list.size();
     }
 }

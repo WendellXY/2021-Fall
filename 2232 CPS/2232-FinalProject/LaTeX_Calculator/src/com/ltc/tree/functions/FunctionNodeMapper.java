@@ -58,4 +58,23 @@ public class FunctionNodeMapper {
                 return null;
         }
     }
+
+    public static boolean isDefinedSign(String operation) {
+        return isUnarySign(operation) || isBinarySign(operation);
+    }
+
+    public static int precedence(String operation) {
+        switch (operation) {
+            case "+":
+            case "-":
+                return 1;
+            case "*":
+            case "/":
+                return 2;
+            case "^":
+                return 3;
+            default:
+                return 0;
+        }
+    }
 }

@@ -40,6 +40,19 @@ public class Test {
         result = processor.fillMissingBracesForSign(latex);
         CheckPassOrFail(result.equals("1^{2}+3^{2}-10^{10}"));
 
+        // Test convertLaTeXFractionToDivision
+        latex = "\\frac{1}{2}";
+        result = processor.convertLaTeXFractionToDivision(latex);
+        CheckPassOrFail(result.equals("((1)/(2))"));
+
+        latex = "\\frac{\\sin{1}}{2}";
+        result = processor.convertLaTeXFractionToDivision(latex);
+        CheckPassOrFail(result.equals("((\\sin{1})/(2))"));
+
+        latex = "\\frac{\\frac{1}{2}}{3}";
+        result = processor.convertLaTeXFractionToDivision(latex);
+        CheckPassOrFail(result.equals("((((1)/(2)))/(3))"));
+
         System.out.println("PreProcessor Test Done.");
     }
 

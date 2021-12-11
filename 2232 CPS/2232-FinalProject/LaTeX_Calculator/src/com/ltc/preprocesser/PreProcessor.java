@@ -1,5 +1,8 @@
 package com.ltc.preprocesser;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 /**
  * The PreProcessor is used to remove and format the LaTeX string such that it could be processed from the StrReader
  */
@@ -139,10 +142,65 @@ public class PreProcessor {
         return stringBuilder.toString();
     }
 
+    /**
+     * Convert the LaTeX Fraction form into the division form, for example, for the latex expression \frac{1}{2}, it
+     * would be convert into ((1)/(2))
+     * @param str the latex string to be processed
+     * @return the latex string after removing some unused begin and end.
+     */
+    public String convertLaTeXFractionToDivision(String str) {
+        ArrayList<Integer> indicesOfFraction = new ArrayList<>();
+
+        for (int i = 0; i < str.length(); i++)
+            if (str.charAt(i) == '\\' && str.startsWith("frac", i + 1))
+                indicesOfFraction.add(i);
+
+        for (int i = indicesOfFraction.size() - 1; i >= 0; i--) {
+            final int indexOfFraction = indicesOfFraction.get(i);
+
+            Stack<Character> braceStack = new Stack<>();
+
+            StringBuilder buffer = new StringBuilder();
+
+            buffer.append(str, 0, indexOfFraction);
+            buffer.append('(');
+
+            for (int j = indexOfFraction + 5, counter = 0; j < str.length(); j++) {
+                final char ch = str.charAt(j);
+
+                if (ch == '{') {
+                    braceStack.push(ch);
+                    buffer.append(braceStack.size() == 1 ? '(' : ch);
+                } else if (ch == '}') {
+                    braceStack.pop();
+                    if (braceStack.isEmpty()) {
+                        buffer.append(')');
+                        if (++counter == 1)
+                            buffer.append('/');
+                        if (counter == 2) {
+                            buffer.append(')');
+                            buffer.append(str.substring(j+1));
+                            str = buffer.toString();
+                            break;
+                        }
+                    } else {
+                        buffer.append(ch);
+                    }
+                } else {
+                    buffer.append(ch);
+                }
+            }
+        }
+
+        return str;
+    }
+
     public String process(String latex) {
         return removeUnusedBeginEnd(
             fillMissingBracesForSign(
-                latex
+                convertLaTeXFractionToDivision(
+                        latex
+                )
             )
         );
     }
