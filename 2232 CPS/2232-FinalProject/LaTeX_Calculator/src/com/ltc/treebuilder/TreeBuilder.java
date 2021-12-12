@@ -85,6 +85,9 @@ public record TreeBuilder(String latex) {
             }
         }
 
+        System.out.println(numberStack);
+        System.out.println(operatorStack);
+
         try {
             return makeTree(numberStack, operatorStack);
         } catch (ClassNotFoundException e) {
@@ -148,7 +151,9 @@ public record TreeBuilder(String latex) {
         }
 
         assert root != null;
-        root.append(new ValueNode(numbers.get(0)));
+
+        if (numbers.size() > 1)
+            root.append(new ValueNode(numbers.get(0)));
 
         return root;
     }

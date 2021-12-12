@@ -5,18 +5,18 @@ import com.ltc.tree.ValueNode;
 public class FunctionNodeMapper {
     public static boolean isUnarySign(String operation) {
         return switch (operation) {
-            case "\\sin", "\\cos", "\\tan" -> true;
+            case "sin", "cos", "tan" -> true;
             default -> false;
         };
     }
 
     public static FunctionNode map2unary(String operation, ValueNode left) {
                 switch (operation) {
-            case "\\sin":
+            case "sin":
                 return new TriSinNode(left, null);
-            case "\\cos":
+            case "cos":
                 return new TriCosNode(left, null);
-            case "\\tan":
+            case "tan":
                 return new TriTanNode(left, null);
             default:
                 System.out.println("Cannot find a binary operation " + operation);
