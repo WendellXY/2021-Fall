@@ -39,15 +39,24 @@ public abstract class FunctionNode extends ValueNode {
      */
     public abstract double process();
 
+    /**
+     * Append node to the tree, it would always add new node to the left-most node, which left node is null
+     * @param node the node to add to the tree
+     */
     public void append(ValueNode node) {
         _append(this, node);
     }
 
-    private void _append(FunctionNode root, ValueNode node) {
-        if (root.left == null) {
-            root.left = node;
+    /**
+     * The recursive implementation of the public append function
+     * @param currentNode the current node to add new node
+     * @param newNode the new node to be added to the current node
+     */
+    private void _append(FunctionNode currentNode, ValueNode newNode) {
+        if (currentNode.left == null) {
+            currentNode.left = newNode;
         } else {
-            _append((FunctionNode) root.left, node);
+            _append((FunctionNode) currentNode.left, newNode);
         }
     }
 }

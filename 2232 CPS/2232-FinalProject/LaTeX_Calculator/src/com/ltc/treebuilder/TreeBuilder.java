@@ -133,11 +133,14 @@ public record TreeBuilder(String latex) {
                 } else {
                     throw new ClassNotFoundException("Undefined Operators");
                 }
+                // because j would automatically minus 1, however, we did not use the currentValueNode, which means the
+                // value of j should keep the same as previous, so here we increase j by 1.
+                j++;
                 continue;
             }
 
             if (isUnarySign(currentOperator)) {
-                root.left = map2unary(currentOperator, currentValueNode);
+                root.append(map2unary(currentOperator, currentValueNode));
                 continue;
             }
 
@@ -152,7 +155,7 @@ public record TreeBuilder(String latex) {
 
         assert root != null;
 
-        if (numbers.size() > 1)
+        if (!isUnarySign(operators.get(0)))
             root.append(new ValueNode(numbers.get(0)));
 
         return root;

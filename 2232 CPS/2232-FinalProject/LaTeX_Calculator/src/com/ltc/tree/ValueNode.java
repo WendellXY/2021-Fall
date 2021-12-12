@@ -25,6 +25,9 @@ public class ValueNode {
         return getType() == NodeType.LEAF;
     }
 
+    /**
+     * @return the negative ValueNode, that is a node which data is the negative form of current node's data
+     */
     public ValueNode toNegative() {
         ValueNode node = new ValueNode(-this.data);
         node.left = this.left;
@@ -32,6 +35,9 @@ public class ValueNode {
         return node;
     }
 
+    /**
+     * @return the reciprocal ValueNode, that is a node which data is the reciprocal of current node's data
+     */
     public ValueNode toReciprocal() {
         ValueNode node = new ValueNode(1/this.data);
         node.left = this.left;
@@ -41,7 +47,6 @@ public class ValueNode {
 
     @Override
     public String toString() {
-
         if (isLeafNode()) {
             return "Number(" + data + ')';
         } else {

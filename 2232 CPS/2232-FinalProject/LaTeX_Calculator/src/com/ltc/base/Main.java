@@ -4,36 +4,42 @@ import com.ltc.preprocesser.PreProcessor;
 import com.ltc.tree.functions.FunctionNode;
 import com.ltc.treebuilder.TreeBuilder;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    private static String readLaTeX() {
-        Scanner scanner = new Scanner(System.in);
+    private static String readLaTeX() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter Mathematical LaTeX Expression Below: ");
 
-        String latex = scanner.nextLine();
+        String latex = reader.readLine();
         System.out.println("Received: \n" + latex);
-
-        scanner.close();
 
         return latex;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Test.test();
 
 	    System.out.println("Welcome to LaTeX Calculator.");
 
-        String latex = readLaTeX();
+        while (true) {
+            String latex = readLaTeX();
 
-        // PreProcess the LaTeX string before build the expression tree
-        PreProcessor preProcessor = new PreProcessor();
-        latex = preProcessor.process(latex);
+            if (latex.equals("q") || latex.equals("quit"))
+                break;
 
-        TreeBuilder treeBuilder = new TreeBuilder(latex);
+            // PreProcess the LaTeX string before build the expression tree
+            PreProcessor preProcessor = new PreProcessor();
+            latex = preProcessor.process(latex);
 
-        FunctionNode tree = treeBuilder.build();
+            TreeBuilder treeBuilder = new TreeBuilder(latex);
 
-        System.out.println(tree.process());
+            FunctionNode tree = treeBuilder.build();
+
+            assert tree != null;
+            System.out.println("Result: " + tree.process());
+        }
     }
 }
