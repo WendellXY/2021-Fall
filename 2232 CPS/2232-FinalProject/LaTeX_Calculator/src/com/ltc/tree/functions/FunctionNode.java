@@ -37,5 +37,17 @@ public abstract class FunctionNode extends ValueNode {
      * Process the data or node within current node.
      * @return the result of current node
      */
-    abstract double process();
+    public abstract double process();
+
+    public void append(ValueNode node) {
+        _append(this, node);
+    }
+
+    private void _append(FunctionNode root, ValueNode node) {
+        if (root.left == null) {
+            root.left = node;
+        } else {
+            _append((FunctionNode) root.left, node);
+        }
+    }
 }

@@ -38,4 +38,17 @@ public class ValueNode {
         node.right = this.right;
         return node;
     }
+
+    @Override
+    public String toString() {
+
+        if (isLeafNode()) {
+            return "Number(" + data + ')';
+        } else {
+            return "Function(" +
+                   "left: " + (left == null ? "null" : left.toString()) +
+                   ", right: " + (right == null ? "null" : right.toString()) +
+                   ")";
+        }
+    }
 }
