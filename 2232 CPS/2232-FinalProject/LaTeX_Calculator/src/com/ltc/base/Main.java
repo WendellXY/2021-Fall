@@ -1,7 +1,6 @@
 package com.ltc.base;
 
 import com.ltc.preprocesser.PreProcessor;
-import com.ltc.treebuilder.TreeBuilder;
 
 import java.util.Scanner;
 

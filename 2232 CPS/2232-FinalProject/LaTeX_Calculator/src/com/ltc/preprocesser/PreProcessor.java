@@ -10,7 +10,7 @@ public class PreProcessor {
     public PreProcessor() { }
 
     /**
-     * Common mark that is missed braces, like 1^2 should/could be write into 1^{2}. We only put '^' inside the array
+     * Common mark that is missed braces, like 1^2 should/could be written into 1^{2}. We only put '^' inside the array
      * since the others do not influence the result of the expression, or it should not appear inside the expression
      * that this command line application accept.
      */
@@ -39,7 +39,7 @@ public class PreProcessor {
 
         for (int i = 0; i < strLength; i++) {
             final char ch = str.charAt(i);
-            // check mark inside the commonMarkThatMissBraces, if find the mark, then make checkingMissingBraces to
+            // check mark inside the commonMarkThatMissBraces, if you find the mark, then make checkingMissingBraces to
             // true, else false
             for (char mark : commonMarkThatMissBraces) {
                 if (ch == mark) {
@@ -51,7 +51,7 @@ public class PreProcessor {
             if (checkingMissingBraces) {
                 buffer.append(ch); // note the first character would be the mark
                 if (ch == '{') {
-                    stringBuilder.append(buffer.toString());
+                    stringBuilder.append(buffer);
                     checkingMissingBraces = false;
                     buffer = new StringBuilder();
                 } else if (Character.isDigit(ch)) {
@@ -61,7 +61,7 @@ public class PreProcessor {
                     checkingMissingBraces = false;
                     buffer = new StringBuilder();
                 }
-            } else { // by default, the character would be append to stringBuilder
+            } else { // by default, the character would be appended to stringBuilder
                 stringBuilder.append(ch);
             }
         }
@@ -109,7 +109,7 @@ public class PreProcessor {
                     if (!keyword.equals("begin") && !keyword.equals("end")) {
                         checkingUnused = false;
                         stringBuilder.append('\\');
-                        stringBuilder.append(buffer.toString());
+                        stringBuilder.append(buffer);
                         buffer = new StringBuilder();
                     }
                 } else if (ch == '}') {
@@ -118,7 +118,7 @@ public class PreProcessor {
                     for (String element : BeginEndException) {
                         if (element.equals(keyword)) {
                             stringBuilder.append('\\');
-                            stringBuilder.append(buffer.toString());
+                            stringBuilder.append(buffer);
                             stringBuilder.append(ch);
                             break;
                         }
@@ -130,7 +130,7 @@ public class PreProcessor {
                 } else {
                     checkingUnused = false;
                     stringBuilder.append('\\');
-                    stringBuilder.append(buffer.toString());
+                    stringBuilder.append(buffer);
                     stringBuilder.append(ch);
                     buffer = new StringBuilder();
                 }
@@ -144,7 +144,7 @@ public class PreProcessor {
 
     /**
      * Convert the LaTeX Fraction form into the division form, for example, for the latex expression \frac{1}{2}, it
-     * would be convert into ((1)/(2))
+     * would be converted into ((1)/(2))
      * @param str the latex string to be processed
      * @return the latex string after removing some unused begin and end.
      */

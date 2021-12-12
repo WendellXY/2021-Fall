@@ -4,14 +4,10 @@ import com.ltc.tree.ValueNode;
 
 public class FunctionNodeMapper {
     public static boolean isUnarySign(String operation) {
-        switch (operation) {
-            case "\\sin":
-            case "\\cos":
-            case "\\tan":
-                return true;
-            default:
-                return false;
-        }
+        return switch (operation) {
+            case "\\sin", "\\cos", "\\tan" -> true;
+            default -> false;
+        };
     }
 
     public static FunctionNode map2unary(String operation, ValueNode left) {
@@ -29,16 +25,10 @@ public class FunctionNodeMapper {
     }
 
     public static boolean isBinarySign(String operation) {
-        switch (operation) {
-            case "+":
-            case "-":
-            case "^":
-            case "*":
-            case "/":
-                return true;
-            default:
-                return false;
-        }
+        return switch (operation) {
+            case "+", "-", "^", "*", "/" -> true;
+            default -> false;
+        };
     }
 
     public static FunctionNode map2binary(String operation, ValueNode left, ValueNode right) {
@@ -64,17 +54,11 @@ public class FunctionNodeMapper {
     }
 
     public static int precedence(String operation) {
-        switch (operation) {
-            case "+":
-            case "-":
-                return 1;
-            case "*":
-            case "/":
-                return 2;
-            case "^":
-                return 3;
-            default:
-                return 0;
-        }
+        return switch (operation) {
+            case "+", "-" -> 1;
+            case "*", "/" -> 2;
+            case "^" -> 3;
+            default -> 0;
+        };
     }
 }

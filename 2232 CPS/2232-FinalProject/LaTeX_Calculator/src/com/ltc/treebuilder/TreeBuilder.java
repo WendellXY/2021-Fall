@@ -1,14 +1,10 @@
 package com.ltc.treebuilder;
 
-import com.ltc.tree.functions.FunctionNode;
-import com.ltc.tree.functions.FunctionNodeMapper;
-
 import java.math.BigDecimal;
 import java.util.Stack;
-import java.util.function.Function;
 import java.util.regex.Pattern;
 
-import static com.ltc.tree.functions.FunctionNodeMapper.*;
+import static com.ltc.tree.functions.FunctionNodeMapper.isDefinedSign;
 
 public class TreeBuilder {
     /**
