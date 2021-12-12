@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 import static com.ltc.tree.functions.FunctionNodeMapper.*;
 
-public class TreeBuilder {
+public record TreeBuilder(String latex) {
     /**
      * @param str the string to check if it is numeric
      * @return true if the str is numeric else false
@@ -27,12 +27,6 @@ public class TreeBuilder {
         }
 
         return pattern.matcher(bigStr).matches();
-    }
-
-    public final String latex;
-
-    public TreeBuilder(String latex) {
-        this.latex = latex;
     }
 
     public static void warning(boolean condition, String str) {
@@ -126,7 +120,7 @@ public class TreeBuilder {
                 continue;
             }
 
-            final String previousOperator = operators.get(i+1);
+            final String previousOperator = operators.get(i + 1);
 
             if (isUnarySign(previousOperator)) {
                 if (isBinarySign(currentOperator)) {
@@ -162,12 +156,12 @@ public class TreeBuilder {
 
     public double parseNumber(String sequence, int offset) {
         StringBuilder stringBuilder = new StringBuilder();
-        while(offset < sequence.length() && Character.isDigit(sequence.charAt(offset)))
+        while (offset < sequence.length() && Character.isDigit(sequence.charAt(offset)))
             stringBuilder.append(sequence.charAt(offset++));
 
         if (offset < sequence.length() && sequence.charAt(offset) == '.') {
             stringBuilder.append(sequence.charAt(offset++));
-            while(offset < sequence.length() && Character.isDigit(sequence.charAt(offset)))
+            while (offset < sequence.length() && Character.isDigit(sequence.charAt(offset)))
                 stringBuilder.append(sequence.charAt(offset++));
         }
 
