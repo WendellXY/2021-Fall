@@ -7,6 +7,6 @@ public class AdditionNode extends FunctionNode {
 
     @Override
     public double process() {
-        return calculateLeftNode() + calculateRightNode();
+        return LeftOperand() + RightOperand();
     }
 }

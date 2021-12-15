@@ -7,6 +7,6 @@ public class PowerNode extends FunctionNode {
 
     @Override
     public double process() {
-        return Math.pow(calculateLeftNode(), calculateRightNode());
+        return Math.pow(LeftOperand(), RightOperand());
     }
 }

@@ -5,6 +5,11 @@ import java.util.Stack;
 
 /**
  * The PreProcessor is used to remove and format the LaTeX string such that it could be processed from the StrReader
+ *
+ * The Preprocessor layer performs intermediate data processing, such as cleaning up invalid expressions and completing
+ * irregular or simplified equations, to make Tree Builder work properly. In addition, Preprocessor converts some common
+ * LaTeX expressions into mathematical expressions, for example, fractional expressions in LaTeX would be converted into
+ * division form here.
  */
 public class PreProcessor {
     public PreProcessor() { }

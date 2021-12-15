@@ -9,6 +9,6 @@ public class TriSinNode extends FunctionNode {
 
     @Override
     public double process() {
-        return Math.sin(calculateLeftNode());
+        return Math.sin(LeftOperand());
     }
 }

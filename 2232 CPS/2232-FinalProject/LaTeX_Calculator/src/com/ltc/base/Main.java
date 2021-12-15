@@ -8,6 +8,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * The Main layer is used to interact with the user, it does not handle LaTeX data directly, in short, it acts like the
+ * Command Line Interface aka CLI.
+ */
 public class Main {
     private static String readLaTeX() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

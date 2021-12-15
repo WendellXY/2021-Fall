@@ -7,6 +7,6 @@ public class TriCosNode extends FunctionNode {
 
     @Override
     public double process() {
-        return Math.cos(calculateLeftNode());
+        return Math.cos(LeftOperand());
     }
 }

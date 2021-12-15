@@ -9,6 +9,6 @@ public class TriTanNode extends FunctionNode {
 
     @Override
     public double process() {
-        return Math.tan(calculateLeftNode());
+        return Math.tan(LeftOperand());
     }
 }
